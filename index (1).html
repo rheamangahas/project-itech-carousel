@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <base target="_top">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+
+  <title>Project ITECH — Student Product Showcase</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    }
+
+    body {
+      background:
+        radial-gradient(
+          circle at top left,
+          #28354d 0%,
+          #111827 42%,
+          #070b13 100%
+        );
+
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .topbar {
+      max-width: 1250px;
+      margin: auto;
+
+      padding:
+        28px 30px 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+
+      border-radius: 14px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #cbd5e1
+        );
+
+      color: #111827;
+
+      font-size: 23px;
+      font-weight: bold;
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,.25);
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: 23px;
+      letter-spacing: -.3px;
+    }
+
+    .brand-text p {
+      margin: 4px 0 0;
+      color: #aab4c5;
+      font-size: 13px;
+    }
+
+    .live {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 8px 13px;
+
+      border: 1px solid
+        rgba(255,255,255,.12);
+
+      border-radius: 999px;
+
+      background:
+        rgba(255,255,255,.06);
+
+      color: #cbd5e1;
+
+      font-size: 12px;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: #7dd3fc;
+
+      box-shadow:
+        0 0 10px #7dd3fc;
+    }
+
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main {
+      max-width: 1250px;
+      margin: auto;
+
+      padding:
+        15px 30px 40px;
+    }
+
+    .carousel {
+      position: relative;
+
+      min-height: 650px;
+
+      border-radius: 30px;
+
+      overflow: hidden;
+
+      background:
+        rgba(255,255,255,.06);
+
+      border:
+        1px solid
+        rgba(255,255,255,.12);
+
+      box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.35);
+
+      backdrop-filter:
+        blur(20px);
+    }
+
+    .slide {
+      display: none;
+
+      min-height: 650px;
+
+      grid-template-columns:
+        minmax(0, 1.25fr)
+        minmax(320px, .75fr);
+    }
+
+    .slide.active {
+      display: grid;
+
+      animation:
+        fadeSlide .6s ease;
+    }
+
+    @keyframes fadeSlide {
+
+      from {
+        opacity: 0;
+        transform:
+          translateX(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform:
+          translateX(0);
+      }
+
+    }
+
+
+    /* =========================
+       POSTER
+    ========================= */
+
+    .poster-side {
+      position: relative;
+
+      min-height: 650px;
+
+      padding: 28px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        rgba(0,0,0,.18);
+    }
+
+    .poster-frame {
+      width: 100%;
+      height: 100%;
+
+      max-height: 590px;
+
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        rgba(255,255,255,.05);
+
+      box-shadow:
+        0 20px 45px
+        rgba(0,0,0,.3);
+    }
+
+    .poster {
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      display: block;
+    }
+
+
+    /* =========================
+       INFORMATION
+    ========================= */
+
+    .info-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding:
+        55px 50px 55px 35px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+
+      padding:
+        7px 12px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(255,255,255,.09);
+
+      border:
+        1px solid
+        rgba(255,255,255,.1);
+
+      color: #cbd5e1;
+
+      font-size: 11px;
+      font-weight: bold;
+
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+
+      margin-bottom: 20px;
+    }
+
+    .product-name {
+      margin: 0;
+
+      font-size:
+        clamp(30px, 4vw, 52px);
+
+      line-height: 1.05;
+
+      letter-spacing: -1.5px;
+    }
+
+    .divider {
+      width: 65px;
+      height: 4px;
+
+      margin:
+        22px 0;
+
+      border-radius: 10px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #fff,
+          rgba(255,255,255,.15)
+        );
+    }
+
+    .description {
+      margin: 0;
+
+      color: #c4ccd8;
+
+      font-size: 17px;
+
+      line-height: 1.7;
+
+      max-width: 520px;
+    }
+
+    .student-card {
+      margin-top: 35px;
+
+      padding: 18px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,.055);
+
+      border:
+        1px solid
+        rgba(255,255,255,.09);
+    }
+
+    .student-label {
+      font-size: 10px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1.2px;
+
+      color: #8995a8;
+
+      margin-bottom: 7px;
+    }
+
+    .student-name {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .section {
+      margin-top: 4px;
+
+      color: #aab4c5;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .nav {
+      position: absolute;
+
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      z-index: 10;
+
+      width: 50px;
+      height: 50px;
+
+      border: 1px solid
+        rgba(255,255,255,.18);
+
+      border-radius: 50%;
+
+      background:
+        rgba(10,15,25,.7);
+
+      color: white;
+
+      font-size: 25px;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition:
+        .2s ease;
+    }
+
+    .nav:hover {
+      transform:
+        translateY(-50%)
+        scale(1.08);
+
+      background:
+        rgba(255,255,255,.15);
+    }
+
+    .prev {
+      left: 20px;
+    }
+
+    .next {
+      right: 20px;
+    }
+
+
+    /* =========================
+       BOTTOM CONTROLS
+    ========================= */
+
+    .bottom {
+      position: absolute;
+
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      padding:
+        15px 25px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 20px;
+
+      background:
+        linear-gradient(
+          transparent,
+          rgba(0,0,0,.65)
+        );
+    }
+
+    .dots {
+      display: flex;
+
+      gap: 7px;
+
+      align-items: center;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+
+      padding: 0;
+
+      border: 0;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.35);
+
+      cursor: pointer;
+
+      transition:
+        .25s ease;
+    }
+
+    .dot.active {
+      width: 25px;
+
+      border-radius: 10px;
+
+      background: white;
+    }
+
+    .play {
+      border: 1px solid
+        rgba(255,255,255,.15);
+
+      background:
+        rgba(255,255,255,.08);
+
+      color: white;
+
+      padding:
+        7px 13px;
+
+      border-radius: 8px;
+
+      font-size: 12px;
+
+      cursor: pointer;
+    }
+
+
+    /* =========================
+       COUNTER
+    ========================= */
+
+    .counter {
+      position: absolute;
+
+      top: 22px;
+      right: 25px;
+
+      z-index: 5;
+
+      padding:
+        7px 11px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(0,0,0,.5);
+
+      color: #d5dbe5;
+
+      font-size: 12px;
+    }
+
+
+    /* =========================
+       LOADING
+    ========================= */
+
+    .loading,
+    .empty,
+    .error {
+
+      min-height: 650px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      flex-direction: column;
+
+      text-align: center;
+
+      color: #b5bfce;
+
+      padding: 30px;
+    }
+
+    .loading-icon {
+      width: 42px;
+      height: 42px;
+
+      border:
+        3px solid
+        rgba(255,255,255,.15);
+
+      border-top-color: white;
+
+      border-radius: 50%;
+
+      animation:
+        spin 1s linear infinite;
+
+      margin-bottom: 18px;
+    }
+
+    @keyframes spin {
+
+      to {
+        transform:
+          rotate(360deg);
+      }
+
+    }
+
+    .empty h2,
+    .error h2 {
+      color: white;
+      margin-bottom: 8px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media
+    (max-width: 800px) {
+
+      .topbar {
+        padding:
+          20px 18px 10px;
+      }
+
+      .brand-text h1 {
+        font-size: 19px;
+      }
+
+      .live {
+        display: none;
+      }
+
+      .main {
+        padding:
+          10px 12px 25px;
+      }
+
+      .carousel {
+        border-radius: 22px;
+      }
+
+      .slide {
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+      }
+
+      .poster-side {
+        min-height: 430px;
+
+        padding: 15px;
+      }
+
+      .poster-frame {
+        height: 400px;
+      }
+
+      .info-side {
+        padding:
+          30px 25px 75px;
+      }
+
+      .product-name {
+        font-size: 32px;
+      }
+
+      .description {
+        font-size: 15px;
+      }
+
+      .nav {
+        width: 42px;
+        height: 42px;
+      }
+
+      .prev {
+        left: 10px;
+      }
+
+      .next {
+        right: 10px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="topbar">
+
+  <div class="brand">
+
+    <div class="brand-icon">
+      ✦
+    </div>
+
+    <div class="brand-text">
+
+      <h1>
+        Student Product Showcase
+      </h1>
+
+      <p>
+        Discover innovative student products
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="live">
+
+    <span class="live-dot"></span>
+
+    APPROVED PRODUCTS
+
+  </div>
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+  <div
+    id="carousel"
+    class="carousel">
+
+    <div class="loading">
+
+      <div class="loading-icon"></div>
+
+      <div>
+        Loading student products...
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+
+let products = [];
+
+let currentSlide = 0;
+
+let autoPlay = true;
+
+let autoPlayTimer;
+
+
+/* =========================
+   LOAD PRODUCTS
+========================= */
+
+function loadGallery() {
+
+  const carousel =
+    document.getElementById(
+      'carousel'
+    );
+
+  carousel.innerHTML =
+    '<div class="loading">' +
+
+    '<div class="loading-icon"></div>' +
+
+    '<div>' +
+    'Loading student products...' +
+    '</div>' +
+
+    '</div>';
+
+
+  /*
+   * GITHUB PAGES DATA SOURCE
+   *
+   * Put a public JSON endpoint URL in PRODUCTS_URL.
+   * For initial testing, products.json is used.
+   *
+   * Expected fields:
+   * imageUrl, productName, productDescription,
+   * studentName, section
+   */
+  const PRODUCTS_URL = 'products.json';
+
+  fetch(PRODUCTS_URL, {
+    cache: 'no-store'
+  })
+    .then(function(response) {
+      if (!response.ok) {
+        throw new Error('Unable to load product data.');
+      }
+      return response.json();
+    })
+    .then(function(items) {
+
+      products = items || [];
+
+      if (products.length === 0) {
+
+        carousel.innerHTML =
+          '<div class="empty">' +
+
+          '<h2>' +
+          'No approved products yet' +
+          '</h2>' +
+
+          '<p>' +
+          'Approved student products will appear here.' +
+          '</p>' +
+
+          '</div>';
+
+        return;
+      }
+
+      currentSlide = 0;
+
+      buildCarousel();
+
+      showSlide(0);
+
+      startAutoPlay();
+
+    })
+    .catch(function(error) {
+
+      carousel.innerHTML =
+        '<div class="error">' +
+
+        '<h2>' +
+        'Unable to load products' +
+        '</h2>' +
+
+        '<p>' +
+        escapeHtml(error.message) +
+        '</p>' +
+
+        '</div>';
+
+    });
+
+}
+
+
+/* =========================
+   BUILD
+========================= */
+
+function buildCarousel() {
+
+  const carousel =
+    document.getElementById(
+      'carousel'
+    );
+
+  carousel.innerHTML = '';
+
+
+  products.forEach(
+    function(item) {
+
+      const slide =
+        document.createElement(
+          'div'
+        );
+
+      slide.className =
+        'slide';
+
+
+      slide.innerHTML =
+
+        '<div class="poster-side">' +
+
+          '<div class="poster-frame">' +
+
+            '<img ' +
+            'class="poster" ' +
+            'src="' +
+            item.imageUrl +
+            '" ' +
+            'alt="' +
+            escapeHtml(
+              item.productName
+            ) +
+            '">' +
+
+          '</div>' +
+
+        '</div>' +
+
+
+        '<div class="info-side">' +
+
+          '<div class="eyebrow">' +
+          'Featured Student Product' +
+          '</div>' +
+
+          '<h2 class="product-name">' +
+
+          escapeHtml(
+            item.productName
+          ) +
+
+          '</h2>' +
+
+          '<div class="divider"></div>' +
+
+          '<p class="description">' +
+
+          escapeHtml(
+            item.productDescription
+          ) +
+
+          '</p>' +
+
+          '<div class="student-card">' +
+
+            '<div class="student-label">' +
+            'Presented by' +
+            '</div>' +
+
+            '<div class="student-name">' +
+
+            escapeHtml(
+              item.studentName
+            ) +
+
+            '</div>' +
+
+            '<div class="section">' +
+
+            escapeHtml(
+              item.section
+            ) +
+
+            '</div>' +
+
+          '</div>' +
+
+        '</div>';
+
+
+      carousel.appendChild(
+        slide
+      );
+
+    }
+  );
+
+
+  /* Previous */
+
+  const previous =
+    document.createElement(
+      'button'
+    );
+
+  previous.className =
+    'nav prev';
+
+  previous.innerHTML =
+    '‹';
+
+  previous.setAttribute(
+    'aria-label',
+    'Previous product'
+  );
+
+  previous.onclick =
+    function() {
+
+      previousSlide();
+
+    };
+
+  carousel.appendChild(
+    previous
+  );
+
+
+  /* Next */
+
+  const next =
+    document.createElement(
+      'button'
+    );
+
+  next.className =
+    'nav next';
+
+  next.innerHTML =
+    '›';
+
+  next.setAttribute(
+    'aria-label',
+    'Next product'
+  );
+
+  next.onclick =
+    function() {
+
+      nextSlide();
+
+    };
+
+  carousel.appendChild(
+    next
+  );
+
+
+  /* Counter */
+
+  const counter =
+    document.createElement(
+      'div'
+    );
+
+  counter.id =
+    'counter';
+
+  counter.className =
+    'counter';
+
+  carousel.appendChild(
+    counter
+  );
+
+
+  /* Bottom controls */
+
+  const bottom =
+    document.createElement(
+      'div'
+    );
+
+  bottom.className =
+    'bottom';
+
+
+  const dots =
+    document.createElement(
+      'div'
+    );
+
+  dots.className =
+    'dots';
+
+
+  products.forEach(
+    function(item, index) {
+
+      const dot =
+        document.createElement(
+          'button'
+        );
+
+      dot.className =
+        'dot';
+
+      dot.setAttribute(
+        'aria-label',
+        'Show product ' +
+        (index + 1)
+      );
+
+      dot.onclick =
+        function() {
+
+          showSlide(index);
+
+          restartAutoPlay();
+
+        };
+
+      dots.appendChild(
+        dot
+      );
+
+    }
+  );
+
+
+  bottom.appendChild(
+    dots
+  );
+
+
+  const play =
+    document.createElement(
+      'button'
+    );
+
+  play.className =
+    'play';
+
+  play.id =
+    'playButton';
+
+  play.textContent =
+    '❚❚ Pause';
+
+  play.onclick =
+    function() {
+
+      toggleAutoPlay();
+
+    };
+
+  bottom.appendChild(
+    play
+  );
+
+
+  carousel.appendChild(
+    bottom
+  );
+
+}
+
+
+/* =========================
+   SHOW SLIDE
+========================= */
+
+function showSlide(index) {
+
+  if (
+    products.length === 0
+  ) {
+    return;
+  }
+
+
+  const slides =
+    document.querySelectorAll(
+      '.slide'
+    );
+
+  const dots =
+    document.querySelectorAll(
+      '.dot'
+    );
+
+
+  if (
+    index >= products.length
+  ) {
+
+    index = 0;
+
+  }
+
+
+  if (index < 0) {
+
+    index =
+      products.length - 1;
+
+  }
+
+
+  slides.forEach(
+    function(slide) {
+
+      slide.classList.remove(
+        'active'
+      );
+
+    }
+  );
+
+
+  dots.forEach(
+    function(dot) {
+
+      dot.classList.remove(
+        'active'
+      );
+
+    }
+  );
+
+
+  slides[index].classList.add(
+    'active'
+  );
+
+
+  dots[index].classList.add(
+    'active'
+  );
+
+
+  currentSlide =
+    index;
+
+
+  const counter =
+    document.getElementById(
+      'counter'
+    );
+
+  if (counter) {
+
+    counter.textContent =
+      (index + 1) +
+      ' / ' +
+      products.length;
+
+  }
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function nextSlide() {
+
+  showSlide(
+    currentSlide + 1
+  );
+
+  restartAutoPlay();
+
+}
+
+
+function previousSlide() {
+
+  showSlide(
+    currentSlide - 1
+  );
+
+  restartAutoPlay();
+
+}
+
+
+/* =========================
+   AUTOPLAY
+========================= */
+
+function startAutoPlay() {
+
+  clearInterval(
+    autoPlayTimer
+  );
+
+
+  if (!autoPlay) {
+    return;
+  }
+
+
+  autoPlayTimer =
+    setInterval(
+      function() {
+
+        showSlide(
+          currentSlide + 1
+        );
+
+      },
+
+      6000
+    );
+
+}
+
+
+function restartAutoPlay() {
+
+  if (autoPlay) {
+
+    startAutoPlay();
+
+  }
+
+}
+
+
+/* =========================
+   PAUSE / PLAY
+========================= */
+
+function toggleAutoPlay() {
+
+  const button =
+    document.getElementById(
+      'playButton'
+    );
+
+
+  autoPlay =
+    !autoPlay;
+
+
+  if (autoPlay) {
+
+    button.textContent =
+      '❚❚ Pause';
+
+    startAutoPlay();
+
+  } else {
+
+    button.textContent =
+      '▶ Play';
+
+    clearInterval(
+      autoPlayTimer
+    );
+
+  }
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHtml(text) {
+
+  return String(
+    text || ''
+  )
+
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+
+    .replace(
+      /</g,
+      '&lt;'
+    )
+
+    .replace(
+      />/g,
+      '&gt;'
+    )
+
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+
+    .replace(
+      /'/g,
+      '&#039;'
+    );
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadGallery();
+
+
+</script>
+
+</body>
+
+</html>
